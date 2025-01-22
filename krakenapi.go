@@ -115,8 +115,9 @@ func (api *KrakenAPI) Time() (*TimeResponse, error) {
 }
 
 // Assets returns the servers available assets
-func (api *KrakenAPI) Assets() (AssetsResponse, error) {
-	resp, err := api.queryPublicGet("Assets", nil, &AssetsResponse{})
+func (api *KrakenAPI) Assets(params ...Param) (AssetsResponse, error) {
+	values := Params(params).ToURLValues()
+	resp, err := api.queryPublicGet("Assets", values, &AssetsResponse{})
 	if err != nil {
 		return nil, err
 	}
@@ -125,8 +126,9 @@ func (api *KrakenAPI) Assets() (AssetsResponse, error) {
 }
 
 // AssetPairs returns the servers available asset pairs
-func (api *KrakenAPI) AssetPairs() (AssetPairsResponse, error) {
-	resp, err := api.queryPublicGet("AssetPairs", nil, &AssetPairsResponse{})
+func (api *KrakenAPI) AssetPairs(params ...Param) (AssetPairsResponse, error) {
+	values := Params(params).ToURLValues()
+	resp, err := api.queryPublicGet("AssetPairs", values, &AssetPairsResponse{})
 	if err != nil {
 		return nil, err
 	}
