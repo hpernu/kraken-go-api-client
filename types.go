@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/big"
+	"net/url"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -382,4 +384,23 @@ type OHLCResponse struct {
 	Pair string  `json:"pair"`
 	OHLC []*OHLC `json:"OHLC"`
 	Last float64 `json:"last"`
+}
+
+type Param struct {
+	Key    string
+	Values []string
+}
+
+func NewParam(key string, values ...string) Param {
+	return Param{Key: key, Values: values}
+}
+
+type Params []Param
+
+func (ps Params) ToURLValues() url.Values {
+	values := make(url.Values)
+	for _, p := range ps {
+		values.Set(p.Key, strings.Join(p.Values, ","))
+	}
+	return values
 }
