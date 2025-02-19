@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"math/big"
 	"mime"
 	"net/http"
@@ -285,9 +286,12 @@ func (api *KrakenAPI) Balance() (BalanceResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	realresp BalanceResponse = make(BalanceResponse)
-	for k, v := range resp {
-		realresp[k] = ParseFloat(v)
+	realresp := make(BalanceResponse)
+	for k, v := range resp.(map[string]string) {
+		realresp[k], err = strconv.ParseFloat(v, 64)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 	return realresp, nil
 }
