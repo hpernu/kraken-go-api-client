@@ -1,3 +1,3 @@
-module github.com/henkvanramshorst/kraken-go-api-client
+module github.com/hpernu/kraken-go-api-client
 
 go 1.22.5

@@ -281,12 +281,15 @@ func (api *KrakenAPI) Trades(pair string, since int64) (*TradesResponse, error) 
 
 // Balance returns all account asset balances
 func (api *KrakenAPI) Balance() (BalanceResponse, error) {
-	resp, err := api.queryPrivate("Balance", url.Values{}, &BalanceResponse{})
+	resp, err := api.queryPrivate("Balance", url.Values{}, &map[string]string{})
 	if err != nil {
 		return nil, err
 	}
-
-	return *resp.(*BalanceResponse), nil
+	realresp BalanceResponse = make(BalanceResponse)
+	for k, v := range resp {
+		realresp[k] = ParseFloat(v)
+	}
+	return realresp, nil
 }
 
 // TradeBalance returns trade balance info
