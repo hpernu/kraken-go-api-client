@@ -24,7 +24,7 @@ const (
 	// APIVersion is the official Kraken API Version Number
 	APIVersion = "0"
 	// APIUserAgent identifies this library with the Kraken API
-	APIUserAgent = "Kraken GO API Agent (https://github.com/henkvanramshorst/kraken-go-api-client)"
+	APIUserAgent = "Kraken GO API Agent (https://github.com/hpernu/kraken-go-api-client)"
 )
 
 type EndpointType int

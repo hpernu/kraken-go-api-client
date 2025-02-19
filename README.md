@@ -16,7 +16,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/henkvanramshorst/kraken-go-api-client"
+	"github.com/hpernu/kraken-go-api-client"
 )
 
 func main() {
